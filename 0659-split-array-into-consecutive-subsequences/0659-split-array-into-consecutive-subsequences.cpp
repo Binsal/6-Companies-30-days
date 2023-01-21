@@ -1,35 +1,35 @@
 class Solution {
 public:
     bool isPossible(vector<int>& nums) {
-        int n=nums.size();
         
-        unordered_map<int,int>mp;
+        int count=0;
+        map<int,int>mp;
+        int maxfreq=0;
         
-        
-        for(auto it:nums){
-            mp[it]++;
+        for(int i=0;i<nums.size();i++){
+            mp[nums[i]]++;
         }
         
         for(auto it:nums){
-           
-            if(mp[it]==0){
-                continue;
-            }
             
-             int curr=it;
-            int count=0;
-            int freq=mp[it];
+            if(mp[it]==0) continue;
             
-            while(freq<=mp[curr]){
-                freq=mp[curr];
-                 mp[curr]--;
-                count++;
-                curr++;
+            maxfreq=mp[it];
+            count=0;
+            int curr=it;
+            
+            
+                while(maxfreq<=mp[curr]){
+                    maxfreq=mp[curr];
+                    mp[curr]--;
+                    count++;
+                    curr++;
+                }
                 
-            }
-            
-            if(count<3)return false;
+  
+            if(count<3) return false;
         }
+        
         return true;
     }
 };
